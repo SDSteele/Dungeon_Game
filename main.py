@@ -49,6 +49,7 @@ sleep(.5)
 #from 1 to 10 (the amount of their attack power) and subtract that from the enemy's hp.
 # the hero can also defend, which will reduce the damage taken by half.
 #the enemy will attack back after the player attacks or defends. the same rules apply to the enemy's attack.
+# add a final screen that displays the player's final stats and whether they won or lost.
 while player_stats['hp'] > 0 and enemy['hp'] > 0:
     action = input("Do you want to (A)ttack or (D)efend? ").strip().upper() #the .strip() method removes any leading or trailing whitespace, and .upper() converts the input to uppercase for consistency.
     #  the .upper() method is used to make the input case-insensitive, so the player can type 'a', 'A', 'd', or 'D'.
@@ -67,9 +68,11 @@ while player_stats['hp'] > 0 and enemy['hp'] > 0:
         enemy_damage = random.randint(1, enemy['attack']) #the enemy's damage is calculated.
         player_stats['hp'] -= enemy_damage #the player's hp is reduced by the enemy's damage.
         print(f"The {enemy['name']} attacks you for {enemy_damage} damage.")
-    else: #if the enemy is dead
-        print(f"You have defeated the {enemy['name']}!")
-        break #exit the loop
+if enemy['hp'] <= 0: #if the enemy is defeated
+    print(f"You have defeated the {enemy['name']}! You are victorious!")
+if player_stats['hp'] <= 0: #if the player is defeated
+    print("You have been defeated. Game over.")
+
 
 
 
