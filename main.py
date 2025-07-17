@@ -80,6 +80,40 @@ if enemy['hp'] <= 0: #if the enemy is defeated
 if player_stats['hp'] <= 0: #if the player is defeated
     print("You have been defeated. Game over.")
 
+print("The goblin lies dead at your feet. Blood pools around you. A sound, foot steps, echo from behind. Another goblin rushes you!")
+
+#ADD: Need to add a method to calculate remaining hp
+
+while player_stats['hp'] > 0 and enemy['hp'] > 0:
+    action = input("Do you want to (A)ttack or (D)efend? ").strip().upper() #the .strip() method removes any leading or trailing whitespace, and .upper() converts the input to uppercase for consistency.
+    #  the .upper() method is used to make the input case-insensitive, so the player can type 'a', 'A', 'd', or 'D'.
+    
+    if action == 'A': #the player chooses to attack
+        damage = random.randint(1, player_stats['attack']) #the random.randint() function generates a random integer between 1 and the player's attack power.
+        enemy['hp'] -= damage #the enemy's hp is reduced by the damage dealt by the player.
+        print(f"You attack the {enemy['name']} for {damage} damage.")
+
+    elif action == 'D': #the player chooses to defend
+        damage = random.randint(1, enemy['attack']) // 2 #the damage taken is halved.
+        player_stats['hp'] -= damage #the player's hp is reduced by the damage taken.
+        print(f"You defend against the {enemy['name']}'s attack and take {damage} damage.")
+
+    else: #the player enters an invalid action
+        print("Invalid action. Please choose 'A' to attack or 'D' to defend.")
+    # the enemy attacks back after the player attacks or defends
+
+    if enemy['hp'] > 0: #if the enemy is still alive
+        enemy_damage = random.randint(1, enemy['attack']) #the enemy's damage is calculated.
+        player_stats['hp'] -= enemy_damage #the player's hp is reduced by the enemy's damage.
+        print(f"The {enemy['name']} attacks you for {enemy_damage} damage.")
+
+if enemy['hp'] <= 0: #if the enemy is defeated
+    print(f"You have defeated the {enemy['name']}! You are victorious!")
+    
+if player_stats['hp'] <= 0: #if the player is defeated
+
+    print("You have been defeated. Game over.")
+
 
 
 
